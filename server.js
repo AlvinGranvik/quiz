@@ -8,8 +8,16 @@ nunjucks.configure("views", {
 app.use(express.static("public"))
 app.get('/', (req, res) => {
   res.render("index.njk", {
-    message: "wsg guys",
-    title: "nunjucks hello world!",
+    message: "Hemsidan med nunjucks!",
+    title: "hem",
+    items: ["A", "B", "C", "D"],
+  })
+})
+
+app.get("/readme", (req, res) => {
+  console.log(req)
+  res.json( { 
+    message: "Hello World!",
   })
 })
 

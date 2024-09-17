@@ -7,10 +7,35 @@ nunjucks.configure("views", {
 })
 app.use(express.static("public"))
 app.get('/', (req, res) => {
+
+  console.log(req.query)
+  const name = req.query.name
   res.render("index.njk", {
-    message: "Hemsidan med nunjucks!",
-    title: "hem",
-    items: ["A", "B", "C", "D"],
+
+
+    title: "Hello World!",
+    message: `Tjena ${name}`,
+  })
+})
+
+app.get('/watch', (req, res) => {
+  /*const movieID = req.query.v
+  console.log(movieID)
+  const movies = {
+    "baba": {
+      title: "The shawshank redemption",
+      year: 1995
+    }
+  }*/
+})
+
+
+app.get(`/ytub`, (req, res) => {
+  const ID = req.query.v
+  console.log(ID)
+  res.render(`ytub.njk`, {
+    title: `Youtube`,
+    youtubeID: ID,
   })
 })
 

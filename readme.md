@@ -9,6 +9,7 @@ För att köra webbserver har vi installerat WSL och Node.
 * cd - change directory
 * history - visar en historik på utförda kommandon
 * npm run dev - börjar köra igång hemsidan.
+* ^C - Stoppar servern
 
 ## Node
 För att initiera ett nytt Node projekt kör jag "npm init -y" i en mapp. Detta skapar en package.json fil.

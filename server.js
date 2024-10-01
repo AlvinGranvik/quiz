@@ -1,55 +1,26 @@
 import express from "express"
 import nunjucks from "nunjucks"
+import morgan from "morgan"
+import indexRouter from "./routes/index.js"
+import searchRouter from "./routes/search.js"
+import calcRouter from "./routes/calc.js"
+
 const app = express()
 nunjucks.configure("views", {
   autoescape: true,
-  express: app,
+  express: app
 })
+
 app.use(express.static("public"))
-app.get('/', (req, res) => {
 
-  console.log(req.query)
-  const name = req.query.name
-  res.render("index.njk", {
+app.use(morgan("dev"))
+app.use("/search", searchRouter)
+app.use("/", indexRouter)
+app.use("/calc", calcRouter)
 
-
-    title: "Hello World!",
-    message: `Tjena ${name}`,
-  })
-})
-
-app.get('/watch', (req, res) => {
-  /*const movieID = req.query.v
-  console.log(movieID)
-  const movies = {
-    "baba": {
-      title: "The shawshank redemption",
-      year: 1995
-    }
-  }*/
-})
-
-
-app.get(`/ytub`, (req, res) => {
-  const ID = req.query.v
-  console.log(ID)
-  res.render(`ytub.njk`, {
-    title: `Youtube`,
-    youtubeID: ID,
-  })
-})
-
-app.get("/readme", (req, res) => {
-  console.log(req)
-  res.json( { 
-    message: "Hello World!",
-  })
-})
-
-app.get('/om', (req, res) => {
-  res.render("om.njk", {
-    message: "Omsidan",
-    title: "Om",
+app.use((req, res) => {
+  res.status(404).render(`404.njk`, {
+    title:`404 not found`
   })
 })
 

@@ -1,5 +1,9 @@
 {% extends "layout.njk" %}
 {% block content %}
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
 <main class="container">
 <h1>{{message}}</h1>
 <p>Välkommen till min sida!</p>
@@ -8,5 +12,7 @@
 {% endfor %}
 <a href="/om">Om</a>
 <a href="/ytub">Watch</a>
+<a href="/calc">Massamatics</a>
 </main>
+</body>
 {% endblock %}

@@ -2,14 +2,16 @@
 {% block content %}
 <main class="container">
 <h1>{{ message }}</h1>
+<h1>If your result is green then it's correct. If it's red then it's false.</h1>
 <ul>
 {% for result in results %}
+  {% if result.correct %}
         <li>{{ result.question }}</li>
-        <li>{{ result.answer }}</li>
-
+        <li style="color:green">{{ result.answer }}</li>
     {% else %}
-      <li>This would display if the 'item' collection were empty</li>
-
+      <li>{{ result.question }}</li>
+    <li style="color:red">{{ result.answer }}</li>
+    {% endif %}
     {% endfor %}
 </ul>
     <p><a href="/quiz/">Gör quizzet igen</a></p>

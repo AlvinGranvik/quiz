@@ -7,39 +7,49 @@ router.get("/", (req, res) => {
     })
 })
 
-router.get("/questions", (req,res) => {
-    const questions = [
-        {
-            id: 1,
-            text: "How for to the make fentanyl?",
-            answers: ["40 lbs pure saffran", "50 burger", "idk", "5"],
-            correctAnswer: "5"
-        },
-    
-        {
-            id: 2,
-            text: "how for burgrer??",
-            answers: ["bob burger", "100 lettuce", "family guys"],
-            correctAnswer: "bob burger"
-        }
-    ]
+const questions = [
+  {
+    id: "q1",
+    text: "How baba in the naba???",
+    answers: [3, 12, 5, 4],
+    correctAnswer: 4
+  },
+  {
+    id: "q2",
+    text: "How for to burger",
+    answers: ["eat the bruger", "egg five times", "im feelin like bars from mars", "mars bar"],
+    correctAnswer: "egg five times",
+  }
+]
+
+router.get("/questions", (req, res) => {
+  res.render("questions.njk", {
+    message: "Frågor",
+    questions
+  })
 })
 
-router.post("/questions", (req, res) => {
-    const answers = req.body
-    console.log(answers)
-    questions.forEach(questions => {
-        const answer = answers(question.id)
-        if (answer == questions.correctAnswer) {
-            console.log("Du har svarat rätt på fråga: ", question.id)
-        }
-    })
-    res.render("questions.njk", {
-        message: "Frågor",
-        questions
-    })
+router.post("/end", (req, res) => {
+  const answers = req.body
+  console.log({answers})
+  const results = questions.map(question => {
+    const answer = answers[question.id]
+    return {
+      question: question.text,
+      answer,
+      correct: answer == question.correctAnswer
+    }
+  })
+
+  res.render("result.njk", {
+    message: "Ditt resultat",
+    results
+  })
 })
-
-
+// rad 4 , 18, 19 i server.js
 
 export default router
+
+// kom ihåg i server.js
+// import quizRouter from './routes/quiz.js'
+// app.use("/quiz", quizRouter)
